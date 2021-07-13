@@ -38,10 +38,9 @@ function renderMealsCard(mealInfo){
     let ratingStars = document.createElement('p')
     ratingStars.innerHTML = rating()
 
-    let avgRating = 0
-    let totalRatings = 0
-    let pAvgRating = document.createElement("p")
-    pAvgRating.innerText = `User Rating: ${avgRating}`
+    let avgRating = document.querySelector("p")
+    let totalRatings = mealInfo.totalRatings
+    avgRating.textContent = `User Rating: ${mealInfo.userRating}`
 
     ratingStars.addEventListener("click", (e) => {
         console.log(e.target)
@@ -75,5 +74,5 @@ function renderMealsCard(mealInfo){
         e.target.review.value = ""
     })
     reviewForm.append(ul)
-    divFrame.append(title, img, ratingStars, pAvgRating, reviewForm)
+    divFrame.append(title, img, ratingStars, avgRating, reviewForm)
 }

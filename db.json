@@ -4,61 +4,81 @@
             "id": 642539,
             "title": "Falafel Burger",
             "image": "https://spoonacular.com/recipeImages/642539-312x231.png",
-            "imageType": "png"
+            "imageType": "png",
+            "userRating": 4.76,
+            "totalRatings": 35
         },
         {
             "id": 631814,
             "title": "$50,000 Burger",
             "image": "https://spoonacular.com/recipeImages/631814-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 2.76,
+            "totalRatings": 30
         },
         {
             "id": 663050,
             "title": "Tex-Mex Burger",
             "image": "https://spoonacular.com/recipeImages/663050-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 4.2,
+            "totalRatings": 23
         },
         {
             "id": 622825,
             "title": "Tortilla Burger Loco Vaca",
             "image": "https://spoonacular.com/recipeImages/622825-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 3.2,
+            "totalRatings": 51
         },
         {
             "id": 663357,
             "title": "The Unagi Burger",
             "image": "https://spoonacular.com/recipeImages/663357-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 4.4,
+            "totalRatings": 36
         },
         {
             "id": 651190,
             "title": "Masala-Tofu Burger",
             "image": "https://spoonacular.com/recipeImages/651190-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 2.9,
+            "totalRatings": 66
         },
         {
             "id": 663252,
             "title": "The Blarney Burger",
             "image": "https://spoonacular.com/recipeImages/663252-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 3.5,
+            "totalRatings": 45
         },
         {
             "id": 650181,
             "title": "Little Italy Burger",
             "image": "https://spoonacular.com/recipeImages/650181-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 4.64,
+            "totalRatings": 29
         },
         {
             "id": 663209,
             "title": "The Benedict Burger",
             "image": "https://spoonacular.com/recipeImages/663209-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 4.11,
+            "totalRatings": 37
         },
         {
             "id": 637631,
             "title": "Cheesy Bacon Burger with Spicy Chipotle Aiolo Sauce",
             "image": "https://spoonacular.com/recipeImages/637631-312x231.jpg",
-            "imageType": "jpg"
+            "imageType": "jpg",
+            "userRating": 3.88,
+            "totalRatings": 54
         }
     ]
 }

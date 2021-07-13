@@ -38,17 +38,18 @@ function renderMealsCard(mealInfo){
     let ratingStars = document.createElement('p')
     ratingStars.innerHTML = rating()
 
-    let avgRating = document.querySelector("p")
+    let pRating = document.querySelector("p")
     let totalRatings = mealInfo.totalRatings
-    avgRating.textContent = `User Rating: ${mealInfo.userRating}`
+    let avgRating = mealInfo.userRating
+    pRating.textContent = `User Rating: ${avgRating}`
 
     ratingStars.addEventListener("click", (e) => {
         console.log(e.target)
-        if (e.target.value === "5") return (avgRating +=5)/(totalRatings++)
-        if (e.target.value === "4") return (avgRating +=4)/(totalRatings++)
-        if (e.target.value === "3") return (avgRating +=3)/(totalRatings++)
-        if (e.target.value === "2") return (avgRating +=2)/(totalRatings++)
-        if (e.target.value === "1") return (avgRating +=1)/(totalRatings++)
+        if (e.target.value === "5") return avgRating = (avgRating +=5)/(totalRatings++)
+        if (e.target.value === "4") return avgRating = (avgRating +=4)/(totalRatings++)
+        if (e.target.value === "3") return avgRating = (avgRating +=3)/(totalRatings++)
+        if (e.target.value === "2") return avgRating = (avgRating +=2)/(totalRatings++)
+        if (e.target.value === "1") return avgRating = (avgRating +=1)/(totalRatings++)
     })
 
     let container = document.querySelector('#search-results')
@@ -74,5 +75,5 @@ function renderMealsCard(mealInfo){
         e.target.review.value = ""
     })
     reviewForm.append(ul)
-    divFrame.append(title, img, ratingStars, avgRating, reviewForm)
+    divFrame.append(title, img, ratingStars, pRating, reviewForm)
 }

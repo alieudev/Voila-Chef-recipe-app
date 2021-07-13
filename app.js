@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+// <<<<<<< HEAD
 // const form = document.querySelector('#search-form')
 // form.addEventListener('submit', (e) => {
 //     e.preventDefault()
@@ -62,13 +62,14 @@
     })
 
     document.querySelector("body").append(reviewForm, ul)
-=======
+// =======
 const form = document.querySelector('#search-form')
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     let query = e.target.search.value
 
     fetchData(query)
+    
 })
 
 function fetchData(query){
@@ -108,4 +109,29 @@ function renderMealsCard(mealInfo){
     divFrame.append(title, img, ratingStars)
     container.append(divFrame)
 }
->>>>>>> bb7918df69fd954798306a907ded38b2072df6a5
+// >>>>>>> bb7918df69fd954798306a907ded38b2072df6a5
+
+//create quick recipe buttons
+function quickMealsButton(){
+
+    let container = document.querySelector('#container')
+    let buttonContainer = document.createElement('div')
+    let h3ButtonTitle = document.createElement('h3')
+    let b15 = document.createElement('button')
+    let b30 = document.createElement('button')
+    let b45 = document.createElement('button')
+    let b1Hour = document.createElement('button')
+
+    h3ButtonTitle.textContent = "How much time do you want to spend cooking today?"
+    b15.textContent = '15 minutes'
+    b30.textContent = '30 minutes'
+    b45.textContent = '45 minutes'
+    b1Hour.textContent = '1 hour or more'
+
+    buttonContainer.append(h3ButtonTitle, b15, b30, b45, b1Hour)
+    container.append(buttonContainer)
+
+
+
+}
+// quickMealsButton();

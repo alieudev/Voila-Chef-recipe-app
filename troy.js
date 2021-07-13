@@ -1,14 +1,14 @@
-const url = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/search?query=bowl&diet=vegetarian&number=10&offset=0&type=main%20course"
 
-document.addEventListener('DOMContentLoaded', fetchData(), start) 
+//document.addEventListener('DOMContentLoaded', fetchData()) 
 
 function fetchData(){ // this function fetches all of my data!
-fetch(url)
+fetch('http://localhost:3000/results')
 .then(res=> res.json())
-.then(data => start(data))
-.catch(err => {console.error(err);});}
+.then(data => quickMealsButton(data))
+;}
+fetchData()
 
-function quickMealsButton(){
+function quickMealsButton(data){
     let container = document.querySelector('#container')
     let buttonContainer = document.createElement('div')
     let h3ButtonTitle = document.createElement('h3')
@@ -26,112 +26,180 @@ function quickMealsButton(){
     b45.id = 'button45min'
     b1Hour.textContent = '1 hour or more'
     b1Hour.id = 'button1hour'
+    
 
     buttonContainer.append(h3ButtonTitle, b15, b30, b45, b1Hour)
     container.append(buttonContainer)
+    loopData(data)
 }
-
-function loopData(data){
-   let loopData = data.results
-    loopData.forEach((data)=>{
-    buttonFunctionality(data)
-    })
-}
-
-function buttonFunctionality(data){
-    let baseUri = "https://spoonacular.com/recipeImages/"
-    let baseUrl = data.image
     
-    let b15 =document.querySelector('#button15min')
-    let b30 = document.querySelector('#button30min')
-    let b45 =document.querySelector('#button45min')
-    let b1h =document.querySelector('#button1hour')
+    function loopData(data){
+        buttonsClick(data)
+       let a = data.forEach((value)=>{return value}) 
+    }
 
-   b15.addEventListener('click',(e)=>{
-       e.preventDefault();
-       if(data.readyInMinutes <= 15){
-        // console.log(data.title)
-        // console.log(data)
-        let container = document.querySelector('#search-results')
-        let img = document.createElement('img')
-        let h3RecipeTitle = document.createElement('h3')
-        let h4DurationTitle = document.createElement('h4')
-        let h4ServingSizeTitle = document.createElement('h4')
+    function buttonsClick(data){
+        let b15 =document.querySelector('#button15min')
+        let b30 = document.querySelector('#button30min')
+        let b45 =document.querySelector('#button45min')
+        let b1h =document.querySelector('#button1hour')
+        // console.log(data[0].title)
+        b15.addEventListener('click',()=>{  
+            
+            container = document.querySelector('#search-results')
+           let h1 = document.createElement('h1')
+           h1.textContent = "hi"
+           container.innerHTML = ""
+           container.append(h1)
+        })
+        b30.addEventListener('click',()=>{
+           container = document.querySelector('#search-results')
+           let h1 = document.createElement('h1')
+           h1.textContent = "goodbye"
+           container.innerHTML = ""
+           container.append(h1)
+        })
+        b45.addEventListener('click',()=>{
+            container = document.querySelector('#search-results')
+            let h1 = document.createElement('h1')
+            h1.textContent = "hi"
+            container.innerHTML = ""
+            container.append(h1)
+         })
+         b1h.addEventListener('click',()=>{
+            container = document.querySelector('#search-results')
+            let h1 = document.createElement('h1')
+            h1.textContent = "goodbye"
+            container.innerHTML = ""
+            container.append(h1)
+         })
+    }
 
-        h3RecipeTitle.textContent = data.title
-        h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
-        img.src = `${baseUri}${baseUrl}`
-        h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
+  
+    
 
-        container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
-    } })
-
-    b30.addEventListener('click',(e)=>{
-        e.preventDefault();
-        if(data.readyInMinutes >= 16 && data.readyInMinutes <= 40){
-         console.log(data.title)
-         console.log(data)
-         let container = document.querySelector('#search-results')
-         let img = document.createElement('img')
-         let h3RecipeTitle = document.createElement('h3')
-         let h4DurationTitle = document.createElement('h4')
-         let h4ServingSizeTitle = document.createElement('h4')
+        // if(value.readyInMinutes >= 16 && data.readyInMinutes <= 40){
+        //  console.log(data.title)
+        // console.log(b[0])
+        //  let container = document.querySelector('#search-results')
+        //  let img = document.createElement('img')
+        //  let h3RecipeTitle = document.createElement('h3')
+        //  let h4DurationTitle = document.createElement('h4')
+        //  let h4ServingSizeTitle = document.createElement('h4')
  
-         h3RecipeTitle.textContent = data.title
-         h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
-         img.src = `${baseUri}${baseUrl}`
-         h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
+        //  h3RecipeTitle.textContent = value.title
+        //  h4DurationTitle.textContent = `Ready in ${value.readyInMinutes} minutes`
+        //  img.src = value.image
+        //  h4ServingSizeTitle.textContent = `Servings: ${value.servings}`
  
-         container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
-     }})
+        //  container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
+     
+    
 
-     b45.addEventListener('click',(e)=>{
-        e.preventDefault();
-        if(data.readyInMinutes >= 45 && data.readyInMinutes <= 50 ){
-         console.log(data.title)
-         console.log(data)
-         let container = document.querySelector('#search-results')
-         let img = document.createElement('img')
-         let h3RecipeTitle = document.createElement('h3')
-         let h4DurationTitle = document.createElement('h4')
-         let h4ServingSizeTitle = document.createElement('h4')
- 
-         h3RecipeTitle.textContent = data.title
-         h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
-         img.src = `${baseUri}${baseUrl}`
-         h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
- 
-         container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
-     }})
 
-     b1h.addEventListener('click',(e)=>{
-        e.preventDefault();
-        if(data.readyInMinutes >= 51 ){
-         console.log(data.title)
-         console.log(data)
-         let container = document.querySelector('#search-results')
-         let img = document.createElement('img')
-         let h3RecipeTitle = document.createElement('h3')
-         let h4DurationTitle = document.createElement('h4')
-         let h4ServingSizeTitle = document.createElement('h4')
- 
-         h3RecipeTitle.textContent = data.title
-         h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
-         img.src = `${baseUri}${baseUrl}`
-         h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
- 
-         container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
-     }})
+// 
 
-}
+// function loopData(data){
+//    let loopData = data.results
+//     loopData.forEach((data)=>{
+//     buttonFunctionality(data)
+//     })
+// }
+
+// function buttonFunctionality(data){
+//     let baseUri = "https://spoonacular.com/recipeImages/"
+//     let baseUrl = data.image
+    
+//     let b15 =document.querySelector('#button15min')
+//     let b30 = document.querySelector('#button30min')
+//     let b45 =document.querySelector('#button45min')
+//     let b1h =document.querySelector('#button1hour')
+
+//    b15.addEventListener('click',(e)=>{
+//        e.preventDefault();
+//        if(data.readyInMinutes <= 15){
+//         // console.log(data.title)
+//         // console.log(data)
+//         let container = document.querySelector('#search-results')
+//         let img = document.createElement('img')
+//         let h3RecipeTitle = document.createElement('h3')
+//         let h4DurationTitle = document.createElement('h4')
+//         let h4ServingSizeTitle = document.createElement('h4')
+
+//         h3RecipeTitle.textContent = data.title
+//         h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
+//         img.src = `${baseUri}${baseUrl}`
+//         h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
+
+//         container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
+//     } })
+
+    // b30.addEventListener('click',(e)=>{
+    //     e.preventDefault();
+    //     if(data.readyInMinutes >= 16 && data.readyInMinutes <= 40){
+    //      console.log(data.title)
+    //      console.log(data)
+    //      let container = document.querySelector('#search-results')
+    //      let img = document.createElement('img')
+    //      let h3RecipeTitle = document.createElement('h3')
+    //      let h4DurationTitle = document.createElement('h4')
+    //      let h4ServingSizeTitle = document.createElement('h4')
+ 
+    //      h3RecipeTitle.textContent = data.title
+    //      h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
+    //      img.src = `${baseUri}${baseUrl}`
+    //      h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
+ 
+    //      container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
+    //  }})
+
+//      b45.addEventListener('click',(e)=>{
+//         e.preventDefault();
+//         if(data.readyInMinutes >= 45 && data.readyInMinutes <= 50 ){
+//          console.log(data.title)
+//          console.log(data)
+//          let container = document.querySelector('#search-results')
+//          let img = document.createElement('img')
+//          let h3RecipeTitle = document.createElement('h3')
+//          let h4DurationTitle = document.createElement('h4')
+//          let h4ServingSizeTitle = document.createElement('h4')
+ 
+//          h3RecipeTitle.textContent = data.title
+//          h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
+//          img.src = `${baseUri}${baseUrl}`
+//          h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
+ 
+//          container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
+//      }})
+
+//      b1h.addEventListener('click',(e)=>{
+//         e.preventDefault();
+//         if(data.readyInMinutes >= 51 ){
+//          console.log(data.title)
+//          console.log(data)
+//          let container = document.querySelector('#search-results')
+//          let img = document.createElement('img')
+//          let h3RecipeTitle = document.createElement('h3')
+//          let h4DurationTitle = document.createElement('h4')
+//          let h4ServingSizeTitle = document.createElement('h4')
+ 
+//          h3RecipeTitle.textContent = data.title
+//          h4DurationTitle.textContent = `Ready in ${data.readyInMinutes} minutes`
+//          img.src = `${baseUri}${baseUrl}`
+//          h4ServingSizeTitle.textContent = `Servings: ${data.servings}`
+ 
+//          container.append(h3RecipeTitle, h4DurationTitle,h4ServingSizeTitle, img)
+//      }})
+
+// }
 
 
                 
 
-function start(data){
-    quickMealsButton();
-    loopData(data)
-}
+// function start(data){
+//     quickMealsButton();
+//     loopData(data)
+// }
 
 
 

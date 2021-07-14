@@ -34,17 +34,13 @@ function renderMealsCard(mealInfo){
     let img = document.createElement('img')
     title.textContent = mealInfo.title
     img.src = mealInfo.image
-    //user ratings
+    //user ratings-- will only work with mock json data
     let avgRating = mealInfo.userRating
-    console.log(avgRating)
     let pRating = document.createElement('p')
     pRating.textContent = `User Rating: ${avgRating}`
-    console.log(pRating)
-
     //ratings stars
     let ratingStars = document.createElement('p')
     ratingStars.innerHTML = rating()
-    console.log(ratingStars)
     //review form
     let reviewForm = document.createElement("form");
     reviewForm.setAttribute("class", "review_form")
@@ -65,21 +61,19 @@ function renderMealsCard(mealInfo){
         ul.append(newReview)
         e.target.review.value = ""
     })
+    //append all meal card data to the div container
     let container = document.querySelector('#search-results')
     container.append(divFrame)
     reviewForm.append(ul)
     divFrame.append(title, img, pRating, ratingStars, reviewForm)
-
-
-
-    //attempt to make star ratings do something functional
-    // ratingStars.addEventListener("click", (e) => {
-    //     console.log(e.target)
-        // let totalRatings = mealInfo.totalRatings
+    //make star rating button change the user ratings average when clicked-- will only work w/ mock json data
+    ratingStars.addEventListener("click", (e) => {
+        console.log(e.target.value)
+    //     let totalRatings = mealInfo.totalRatings
     //     if (e.target.value === "5") return avgRating = (avgRating +=5)/(totalRatings++)
     //     if (e.target.value === "4") return avgRating = (avgRating +=4)/(totalRatings++)
     //     if (e.target.value === "3") return avgRating = (avgRating +=3)/(totalRatings++)
     //     if (e.target.value === "2") return avgRating = (avgRating +=2)/(totalRatings++)
     //     if (e.target.value === "1") return avgRating = (avgRating +=1)/(totalRatings++)
-    // })
+    })
 }

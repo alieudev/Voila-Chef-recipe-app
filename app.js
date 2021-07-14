@@ -11,11 +11,11 @@
 //     fetch('http://localhost:3000/results')
 //     .then(res => res.json())
 //     .then(data => data.forEach(renderMealsCard))
-//     // .then(data => renderMealsCard(data))
-//     // let requestOptions = {
-//     //     method: 'GET',
-//     //     redirect: 'follow'
-//     //   };
+//     .then(data => renderMealsCard(data))
+//     let requestOptions = {
+//         method: 'GET',
+//         redirect: 'follow'
+//       };}
     
 //     // const URL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey='
 //     // query = query;
@@ -67,7 +67,7 @@ const form = document.querySelector('#search-form')
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     let query = e.target.search.value
-
+    console.log(e.target)
     fetchData(query)
     
 })
@@ -112,100 +112,6 @@ function renderMealsCard(mealInfo){
 // >>>>>>> bb7918df69fd954798306a907ded38b2072df6a5
 
 //create quick recipe buttons
-function quickMealsButton(){
 
-    let container = document.querySelector('#container')
-    let buttonContainer = document.createElement('div')
-    let h3ButtonTitle = document.createElement('h3')
-    let b15 = document.createElement('button')
-    let b30 = document.createElement('button')
-    let b45 = document.createElement('button')
-    let b1Hour = document.createElement('button')
-
-    h3ButtonTitle.textContent = "How much time do you want to spend cooking today?"
-    b15.textContent = '15 minutes'
-    b30.textContent = '30 minutes'
-    b45.textContent = '45 minutes'
-    b1Hour.textContent = '1 hour or more'
-
-    buttonContainer.append(h3ButtonTitle, b15, b30, b45, b1Hour)
-    container.append(buttonContainer)
-
-
-
-}
-function fetchData(){ // this function fetches all of my data!
-    fetch('http://localhost:3000/results')
-    .then(res=> res.json())
-    .then(data => quickMealsButton(data))
-    ;}
-    fetchData()
-    
-    function quickMealsButton(data){
-        let container = document.querySelector('#container')
-        let buttonContainer = document.createElement('div')
-        let h3ButtonTitle = document.createElement('h3')
-        let b15 = document.createElement('button')
-        let b30 = document.createElement('button')
-        let b45 = document.createElement('button')
-        let b1Hour = document.createElement('button')
-    
-        h3ButtonTitle.textContent = "How much time do you want to spend cooking today?"
-        b15.textContent = '15 minutes or less'
-        b15.id = 'button15min'
-        b30.textContent = '30 - 40 minutes'
-        b30.id = 'button30min'
-        b45.textContent = '45 - 50 minutes'
-        b45.id = 'button45min'
-        b1Hour.textContent = '1 hour or more'
-        b1Hour.id = 'button1hour'
-        
-    
-        buttonContainer.append(h3ButtonTitle, b15, b30, b45, b1Hour)
-        container.append(buttonContainer)
-        loopData(data)
-    }
-        
-        function loopData(data){
-            buttonsClick(data)
-           let a = data.forEach((value)=>{return value}) 
-        }
-    
-        function buttonsClick(data){
-            let b15 =document.querySelector('#button15min')
-            let b30 = document.querySelector('#button30min')
-            let b45 =document.querySelector('#button45min')
-            let b1h =document.querySelector('#button1hour')
-            // console.log(data[0].title)
-            b15.addEventListener('click',()=>{  
-                
-                container = document.querySelector('#search-results')
-               let h1 = document.createElement('h1')
-               h1.textContent = "hi"
-               container.innerHTML = ""
-               container.append(h1)
-            })
-            b30.addEventListener('click',()=>{
-               container = document.querySelector('#search-results')
-               let h1 = document.createElement('h1')
-               h1.textContent = "goodbye"
-               container.innerHTML = ""
-               container.append(h1)
-            })
-            b45.addEventListener('click',()=>{
-                container = document.querySelector('#search-results')
-                let h1 = document.createElement('h1')
-                h1.textContent = "hi"
-                container.innerHTML = ""
-                container.append(h1)
-             })
-             b1h.addEventListener('click',()=>{
-                container = document.querySelector('#search-results')
-                let h1 = document.createElement('h1')
-                h1.textContent = "goodbye"
-                container.innerHTML = ""
-                container.append(h1)
-             })
-        }
 
 

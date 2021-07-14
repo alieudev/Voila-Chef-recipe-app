@@ -34,7 +34,7 @@ function renderMealsCard(mealInfo){
     let img = document.createElement('img')
     title.textContent = mealInfo.title
     img.src = mealInfo.image
-    //user ratings-- will only work with mock json data
+    //user ratings
     let totalRating = 10
     let numberRatings = 2
     let avgRating = totalRating/numberRatings
@@ -61,7 +61,7 @@ function renderMealsCard(mealInfo){
             totalRating ++ 
             numberRatings++
         }
-        avgRating = parseFloat(totalRating/numberRatings).toFixed(2)
+        avgRating = (totalRating/numberRatings).toFixed(2)
         pRating.textContent = `User Rating: ${avgRating}`
     })
     //review form

@@ -35,12 +35,35 @@ function renderMealsCard(mealInfo){
     title.textContent = mealInfo.title
     img.src = mealInfo.image
     //user ratings-- will only work with mock json data
-    let avgRating = mealInfo.userRating
+    let totalRating = 10
+    let numberRatings = 2
+    let avgRating = totalRating/numberRatings
     let pRating = document.createElement('p')
     pRating.textContent = `User Rating: ${avgRating}`
     //ratings stars
     let ratingStars = document.createElement('p')
     ratingStars.innerHTML = rating()
+    //make star rating button change the user ratings average when clicked
+    ratingStars.addEventListener("click", (e) => {
+        if (e.target.value === "5") {
+            totalRating +=5 
+            numberRatings++
+        } else if (e.target.value === "4") {
+            totalRating +=4
+            numberRatings++
+        } else if (e.target.value === "3") {
+            totalRating +=3
+            numberRatings++
+        } else if (e.target.value === "2") {
+            totalRating +=2 
+            numberRatings++
+        } else if (e.target.value === "1") {
+            totalRating ++ 
+            numberRatings++
+        }
+        avgRating = parseFloat(totalRating/numberRatings).toFixed(2)
+        pRating.textContent = `User Rating: ${avgRating}`
+    })
     //review form
     let reviewForm = document.createElement("form");
     reviewForm.setAttribute("class", "review_form")
@@ -66,14 +89,4 @@ function renderMealsCard(mealInfo){
     container.append(divFrame)
     reviewForm.append(ul)
     divFrame.append(title, img, pRating, ratingStars, reviewForm)
-    //make star rating button change the user ratings average when clicked-- will only work w/ mock json data
-    ratingStars.addEventListener("click", (e) => {
-        console.log(e.target.value)
-    //     let totalRatings = mealInfo.totalRatings
-    //     if (e.target.value === "5") return avgRating = (avgRating +=5)/(totalRatings++)
-    //     if (e.target.value === "4") return avgRating = (avgRating +=4)/(totalRatings++)
-    //     if (e.target.value === "3") return avgRating = (avgRating +=3)/(totalRatings++)
-    //     if (e.target.value === "2") return avgRating = (avgRating +=2)/(totalRatings++)
-    //     if (e.target.value === "1") return avgRating = (avgRating +=1)/(totalRatings++)
-    })
 }

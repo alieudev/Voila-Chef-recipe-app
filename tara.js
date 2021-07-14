@@ -37,9 +37,9 @@ function renderMealsCard(mealInfo){
     //user ratings
     let avgRating = mealInfo.userRating
     console.log(avgRating)
-    // let pRating = document.querySelector('p')
-    // pRating.textContent = `User Rating: ${avgRating}`
-    // console.log(pRating)
+    let pRating = document.createElement('p')
+    pRating.textContent = `User Rating: ${avgRating}`
+    console.log(pRating)
 
     //ratings stars
     let ratingStars = document.createElement('p')
@@ -68,7 +68,7 @@ function renderMealsCard(mealInfo){
     let container = document.querySelector('#search-results')
     container.append(divFrame)
     reviewForm.append(ul)
-    divFrame.append(title, img, ratingStars, reviewForm)
+    divFrame.append(title, img, pRating, ratingStars, reviewForm)
 
 
 

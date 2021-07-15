@@ -123,53 +123,103 @@ function renderData(data){
     let quickMealButton = document.createElement('button')
     quickMealButton.id = "quick-meals-button"
     quickMealButton.textContent="Quick Meals"
-    let healthyMealButton = document.createElement('button')
-    healthyMealButton.id = "healthy-meals-button"
-    healthyMealButton.textContent = "Healthy Meals"
+    let clear = document.createElement('button')
+    clear.id = "clear"
+    clear.textContent = "Clear"
+    let vegetarianMeals = document.createElement('button')
+    vegetarianMeals.id = "vegetarian-meals"
+    vegetarianMeals.textContent="Healthy Meals"
     h3RecipeTitle.id="recipe-title"
     
     body.append(buttonContainer)
-    buttonsContainer.append(quickMealButton, buttonResultsContainer)
+    buttonsContainer.append(quickMealButton,vegetarianMeals, clear, buttonResultsContainer)
     buttonContainer.append(buttonsContainer)
     
     
-   // QUICK MEAL button event listener
+   // button event listeners
    quickMealButton.addEventListener('click', ()=> {
-         h3RecipeTitle.innerHTML=""            
-         
-         //stops duplicate results everytime I click button
+         h3RecipeTitle.innerHTML=""        
             data.forEach((meals)=>{ 
-                //loop recipe objects {} to seperate contents
                 if(meals.readyInMinutes >= 30 ){
-                    
-                    
-                     let recipeUl = document.createElement('ul')
+                    let recipeUl = document.createElement('ul')
                     let recipeLi = document.createElement('li')
                     let summaryLi = document.createElement('li')
                     let image = document.createElement('img')
-                    let title = document.createElement('li')
-                    let h4Time = document.createElement('li')
+                   let title = document.createElement('li')
+                   let h4Time = document.createElement('li')
+                   let liGetRecipeContainer = document.createElement('li')
+                   let getRecipeDetails = document.createElement('details')
+                   let getRecipeSummary = document.createElement('summary')
+                   let getRecipeMoreDetails = document.createElement('p')  
 
-                    let liGetRecipeContainer = document.createElement('li')
-                    let getRecipeDetails = document.createElement('details')
-                    getRecipeDetails.id="details"
-                    let getRecipeSummary = document.createElement('summary')
-                    getRecipeSummary.textContent= "Get the recipe"
-                    let getRecipeMoreDetails = document.createElement('p')
-                    getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
+                   getRecipeDetails.id="details"
+                   getRecipeSummary.textContent= "Get the recipe"
+                   getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
                    liGetRecipeContainer.append(getRecipeDetails)
-                    
-                    h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                   h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
                     image.src = meals.image
                     title.textContent = meals.title
-                    summaryLi.innerHTML = meals.summary
-                    recipeUl.appendChild(recipeLi)
+                   summaryLi.innerHTML = meals.summary
+                   recipeUl.appendChild(recipeLi)
                     recipeLi.append(title, image, summaryLi, h4Time,liGetRecipeContainer)
                     h3RecipeTitle.append(recipeUl)
                     buttonResultsContainer.append(h3RecipeTitle)
 
-                    } }) })
-                       
+                    let steps= meals.analyzedInstructions[0].steps
+                        steps.forEach((stepList)=>{
+                            let step = document.createElement('p')
+                            getRecipeMoreDetails.append(step)
+                            let stepNumber = stepList.number
+                            let direction = stepList.step
+                            step.textContent=`Step${stepNumber}: ${direction}`
+                        })
+                } }) })
+                    
+    vegetarianMeals.addEventListener('click', ()=> {
+        h3RecipeTitle.innerHTML=""        
+            data.forEach((meals)=>{ 
+                 if(meals.healthScore > 30 ){          
+                    let recipeUl = document.createElement('ul')
+                     let recipeLi = document.createElement('li')
+                     let summaryLi = document.createElement('li')
+                     let image = document.createElement('img')
+                    let title = document.createElement('li')
+                    let h4Time = document.createElement('li')
+                    let liGetRecipeContainer = document.createElement('li')
+                    let getRecipeDetails = document.createElement('details')
+                    let getRecipeSummary = document.createElement('summary')
+                    let getRecipeMoreDetails = document.createElement('p')
+                    
+                        getRecipeDetails.id="details"
+                        getRecipeSummary.textContent= "Get the recipe"
+                        getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
+                        liGetRecipeContainer.append(getRecipeDetails)
+                        h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                         image.src = meals.image
+                         title.textContent = meals.title
+                        summaryLi.innerHTML = meals.summary
+                         recipeUl.appendChild(recipeLi)
+                         recipeLi.append(title, image, summaryLi, h4Time,liGetRecipeContainer)
+                         h3RecipeTitle.append(recipeUl)
+                         buttonResultsContainer.append(h3RecipeTitle)
+
+                         let steps= meals.analyzedInstructions[0].steps
+                        steps.forEach((stepList)=>{
+                            let step = document.createElement('p')
+                            getRecipeMoreDetails.append(step)
+                            let stepNumber = stepList.number
+                            let direction = stepList.step
+                            step.textContent=`Step${stepNumber}: ${direction}`
+                        })
+                        } }) })    
+                    
+        clear.addEventListener('click',()=>{
+            let test = document.createElement('h1')
+            buttonResultsContainer.innerHTML=''
+            test.textContent=""
+            buttonResultsContainer.append(test)             
+                         })                      
+
                 }
 
                 

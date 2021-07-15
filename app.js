@@ -1,43 +1,29 @@
-// <<<<<<< HEAD
-// const form = document.querySelector('#search-form')
-// form.addEventListener('submit', (e) => {
-//     e.preventDefault()
-//     let query = e.target.search.value
 
-//     fetchData(query)
-// })
+const form1 = document.querySelector('#search-form')
 
-// function fetchData(query){
-//     fetch('http://localhost:3000/results')
-//     .then(res => res.json())
-//     .then(data => data.forEach(renderMealsCard))
-//     .then(data => renderMealsCard(data))
-//     let requestOptions = {
-//         method: 'GET',
-//         redirect: 'follow'
-//       };}
+form1.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let query = e.target.search.value
+    fetchData(query)
     
-//     // const URL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey='
-//     // query = query;
-//     // const apiKey = '8e2d94c85e734ab5a2bea8f4a2b1f8bf'
-    
-//     // fetch(`${URL}${apiKey}&query=${query}`, requestOptions)
-//     // .then(response => response.json())
-//     // .then(data => renderMealsCard(data))
-//     // .catch(error => console.log('error', error));
-// }
+})
 
-// function renderMealsCard(mealInfo){
-//     let divFrame = document.createElement('div')
-//     let title = document.createElement('h2')
-//     let img = document.createElement('img')
-//     title.textContent = mealInfo.title
-//     img.src = mealInfo.image
+function fetchData(){
+    fetch('http://localhost:3000/results')
+    .then(res => res.json())
+    .then(data => data.forEach(renderMealsCard))}
+  
 
-//     let container = document.querySelector('#search-results')
-//     divFrame.append(title, img)
-//     container.append(divFrame)
-// }
+function renderMealsCard(mealInfo){
+    let divFrame = document.createElement('div')
+    let title = document.createElement('h2')
+    let img = document.createElement('img')
+    title.textContent = mealInfo.title
+    img.src = mealInfo.image
+    let container = document.querySelector('#search-results')
+    divFrame.append(title, img)
+    container.append(divFrame)
+}
 
 //create a form that allows users to leave a review
     let reviewForm = document.createElement("form");
@@ -62,14 +48,14 @@
     })
 
     document.querySelector("body").append(reviewForm, ul)
-// =======
+   
 const form = document.querySelector('#search-form')
+
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     let query = e.target.search.value
-    console.log(e.target)
+
     fetchData(query)
-    
 })
 
 function fetchData(query){
@@ -109,9 +95,81 @@ function renderMealsCard(mealInfo){
     divFrame.append(title, img, ratingStars)
     container.append(divFrame)
 }
-// >>>>>>> bb7918df69fd954798306a907ded38b2072df6a5
 
-//create quick recipe buttons
+//////////////////////////////////////////////////////////////////////////////
+document.addEventListener('DOMContentLoaded', fetchData1()) 
+
+ // this function fetches all of my data! Using troy.json
+    function fetchData1(){
+        fetch('http://localhost:3000/results')
+         .then(res=> res.json())
+        .then(data => {renderData(data)})
+    }
 
 
+function renderData(data){
+    //buttons and divs are created here 
+    let body = document.querySelector('body')
+    let buttonContainer = document.createElement('div')
+    buttonContainer.id = "button-container"
+    let buttonsContainer = document.createElement('div')
+    buttonsContainer.id= "buttons-go-here"
+    let buttonResultsContainer= document.createElement('div')
+    buttonResultsContainer.id = "button-results-container"
+    let h3RecipeTitle = document.createElement('h3')
+    let imgResult = document.createElement('img')
+     let h5Summary= document.createElement('h5')
+    
+    let quickMealButton = document.createElement('button')
+    quickMealButton.id = "quick-meals-button"
+    quickMealButton.textContent="Quick Meals"
+    let healthyMealButton = document.createElement('button')
+    healthyMealButton.id = "healthy-meals-button"
+    healthyMealButton.textContent = "Healthy Meals"
+    h3RecipeTitle.id="recipe-title"
+    
+    body.append(buttonContainer)
+    buttonsContainer.append(quickMealButton, buttonResultsContainer)
+    buttonContainer.append(buttonsContainer)
+    
+    
+   // QUICK MEAL button event listener
+   quickMealButton.addEventListener('click', ()=> {
+         h3RecipeTitle.innerHTML=""            
+         
+         //stops duplicate results everytime I click button
+            data.forEach((meals)=>{ 
+                //loop recipe objects {} to seperate contents
+                if(meals.readyInMinutes >= 30 ){
+                    
+                    
+                     let recipeUl = document.createElement('ul')
+                    let recipeLi = document.createElement('li')
+                    let summaryLi = document.createElement('li')
+                    let image = document.createElement('img')
+                    let title = document.createElement('li')
+                    let h4Time = document.createElement('li')
 
+                    let liGetRecipeContainer = document.createElement('li')
+                    let getRecipeDetails = document.createElement('details')
+                    getRecipeDetails.id="details"
+                    let getRecipeSummary = document.createElement('summary')
+                    getRecipeSummary.textContent= "Get the recipe"
+                    let getRecipeMoreDetails = document.createElement('p')
+                    getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
+                   liGetRecipeContainer.append(getRecipeDetails)
+                    
+                    h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                    image.src = meals.image
+                    title.textContent = meals.title
+                    summaryLi.innerHTML = meals.summary
+                    recipeUl.appendChild(recipeLi)
+                    recipeLi.append(title, image, summaryLi, h4Time,liGetRecipeContainer)
+                    h3RecipeTitle.append(recipeUl)
+                    buttonResultsContainer.append(h3RecipeTitle)
+
+                    } }) })
+                       
+                }
+
+                

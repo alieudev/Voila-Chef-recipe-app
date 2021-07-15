@@ -1,11 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', fetchData(), /*structure()*/) 
 
- // this function fetches all of my data!
+ // this function fetches all of my data! Using troy.json
     function fetchData(query){
         fetch('http://localhost:3000/results')
          .then(res=> res.json())
-        .then(data => {loopData(data)})
+        .then(data => {renderData(data)})
       
         // const URL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey='
         // let query1 = 'chicken'
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', fetchData(), /*structure()*/)
     }
 
 
-function loopData(data){
+function renderData(data){
     //console.log(data)
     let body = document.querySelector('body')
     let buttonContainer = document.createElement('div')
@@ -31,6 +31,7 @@ function loopData(data){
     let imgResult = document.createElement('img')
     let h4Time = document.createElement('h4')
     let h5Summary= document.createElement('h5')
+    
 
     let quickMealButton = document.createElement('button')
     quickMealButton.id = "quick-meals-button"
@@ -39,6 +40,7 @@ function loopData(data){
     healthyMealButton.id = "healthy-meals-button"
     healthyMealButton.textContent = "Healthy Meals"
 
+    
     buttonsContainer.append(quickMealButton, healthyMealButton, buttonResultsContainer)
     buttonContainer.append(buttonsContainer)
     body.append(buttonContainer)
@@ -46,23 +48,23 @@ function loopData(data){
    //console.log(data)
    quickMealButton.addEventListener('click', ()=> {
             data.forEach((meals)=>{
-                if(meals.readyInMinutes <= 30){
+                if(meals.readyInMinutes >= 30){
                     h3RecipeTitle.textContent = meals.title
                     imgResult.src = meals.image
                     h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
                     h5Summary.innerHTML = `Summary: ${meals.summary}`
                     buttonResultsContainer.append(h3RecipeTitle, imgResult, h4Time, h5Summary)  
                 } }) })
-    // healthyMealButton.addEventListener('click', ()=> {
-    //         data.forEach((meals)=>{
-    //             console.log(meals.veryHealthy.true)
-    //             if(meals.veryHealthy === 'true'){
-    //                 h3RecipeTitle.textContent = meals.title
-    //                 imgResult.src = meals.image
-    //                 h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
-    //                 h5Summary.innerHTML = `Summary: ${meals.summary}`
-    //                 buttonResultsContainer.append(h3RecipeTitle, imgResult, h4Time, h5Summary)  
-    //             } }) })
+    healthyMealButton.addEventListener('click', ()=> {
+            data.forEach((meals)=>{
+                console.log(meals.veryHealthy.true)
+                if(meals.veryHealthy === 'true'){
+                    h3RecipeTitle.textContent = meals.title
+                    imgResult.src = meals.image
+                    h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                    h5Summary.innerHTML = `Summary: ${meals.summary}`
+                    buttonResultsContainer.append(h3RecipeTitle, imgResult, h4Time, h5Summary)  
+                } }) })
     
         }
 

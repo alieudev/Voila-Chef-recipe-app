@@ -1,6 +1,8 @@
 // const dotenv = require('dotenv').config();
 // const API_KEY = process.env.API_KEY;
 
+const apiKey = '2b744349f3d8403ab9076a2080cd086d'
+
 //////////////////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', ()=> {
     fetchInitialData()
@@ -8,9 +10,20 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
  // this function fetches all of my data! Using troy.json
     function fetchInitialData(){
-        fetch('http://localhost:3000/results')
-        .then(res=> res.json())
-        .then(data => {initialRender(data)})
+        // fetch('http://localhost:3000/results')
+        // .then(res=> res.json())
+        // .then(data => {initialRender(data)})
+    const URL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey='
+    //let query1 = 'chicken'
+    let queryList =['chicken', 'pork', 'beef', 'rice','pasta','pizza','dessert','cake','pie','meal','breakfast','lunch','dinner','brunch','fruit','smoothie','coffee','hotdog','burger','pie','ice cream','salad','tofu','vegan','vegetarian','keto','sausage','soup','bread']
+    let queryRandom = queryList[Math.floor(Math.random()*queryList.length)];
+    let info = 'true'
+    let readyTime = 120
+
+    fetch(`${URL}${apiKey}&query=${queryRandom}&addRecipeInformation=${true}&${readyTime}`)
+    .then(response => response.json())
+    .then(data => initialRender(data.results))
+    .catch(error => console.log('error', error));
     }
 
 
@@ -43,76 +56,85 @@ function initialRender(data){
     buttonContainer.append(buttonsContainer)
     
     
-   // button event listeners
-   quickMealButton.addEventListener('click', ()=> {
-         h3RecipeTitle.innerHTML=""        
+    // ADD EVENTS UPDATE 06/16/21 /////////////////////
+    quickMealButton.addEventListener('click', ()=> {
+        h3RecipeTitle.innerHTML=""        
             data.forEach((meals)=>{ 
-                if(meals.readyInMinutes >= 30 ){
-                let recipeUl = document.createElement('ul')
-                let recipeLi = document.createElement('li')
-                let summaryLi = document.createElement('li')
-                let image = document.createElement('img')
-                let title = document.createElement('li')
-                let h4Time = document.createElement('li')
-                let liGetRecipeContainer = document.createElement('li')
-                let getRecipeDetails = document.createElement('details')
-                let getRecipeSummary = document.createElement('summary')
-                let getRecipeMoreDetails = document.createElement('p')  
+                if(meals.readyInMinutes <= 45 ){
+                    let recipeUl = document.createElement('ul')
+                    let recipeLi = document.createElement('li')
+                    let summaryLi = document.createElement('li')
+                    summaryLi.id="summary"
+                    let image = document.createElement('img')
+                   let title = document.createElement('li')
+                   title.id="hey"
+                   let h4Time = document.createElement('li')
+                   let liGetRecipeContainer = document.createElement('li')
+                   let getRecipeDetails = document.createElement('details')
+                   let getRecipeSummary = document.createElement('summary')
+                   let getRecipeMoreDetails = document.createElement('p')  
 
-                getRecipeDetails.id="details"
-                getRecipeSummary.textContent= "Get the recipe"
-                getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
-                liGetRecipeContainer.append(getRecipeDetails)
-                h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
-                image.src = meals.image
-                title.textContent = meals.title
-                summaryLi.innerHTML = meals.summary
-                recipeUl.appendChild(recipeLi)
-                recipeLi.append(title, image, summaryLi, h4Time,liGetRecipeContainer)
-                h3RecipeTitle.append(recipeUl)
-                buttonResultsContainer.append(h3RecipeTitle)
+                   getRecipeDetails.id="details"
+                   getRecipeSummary.textContent= "Get the recipe"
+                   getRecipeSummary.id="gtr"
+                   getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
+                   liGetRecipeContainer.append(getRecipeDetails)
+                   h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                   h4Time.id="h4time"
+                    image.src = meals.image
+                    title.textContent = meals.title
+                   summaryLi.innerHTML = meals.summary
+                   recipeUl.appendChild(recipeLi)
+                    recipeLi.append(title, image, h4Time, summaryLi,liGetRecipeContainer)
+                    h3RecipeTitle.append(recipeUl)
+                    buttonResultsContainer.append(h3RecipeTitle)
 
-                let steps= meals.analyzedInstructions[0].steps
-                    steps.forEach((stepList)=>{
-                        let step = document.createElement('p')
-                        getRecipeMoreDetails.append(step)
-                        let stepNumber = stepList.number
-                        let direction = stepList.step
-                        step.textContent=`Step${stepNumber}: ${direction}`
-                    })
-            } }) })
-                    
+                    let steps= meals.analyzedInstructions[0].steps
+                        steps.forEach((stepList)=>{
+                            let step = document.createElement('p')
+                            step.id="steps"
+                            getRecipeMoreDetails.append(step)
+                            let stepNumber = stepList.number
+                            let direction = stepList.step
+                            step.textContent=`Step${stepNumber}: ${direction}`
+                        })
+                } }) })
     vegetarianMeals.addEventListener('click', ()=> {
         h3RecipeTitle.innerHTML=""        
             data.forEach((meals)=>{ 
                  if(meals.healthScore > 30 ){          
-                let recipeUl = document.createElement('ul')
+                    let recipeUl = document.createElement('ul')
                     let recipeLi = document.createElement('li')
                     let summaryLi = document.createElement('li')
+                    summaryLi.id="summary"
                     let image = document.createElement('img')
-                    let title = document.createElement('li')
-                    let h4Time = document.createElement('li')
-                    let liGetRecipeContainer = document.createElement('li')
-                    let getRecipeDetails = document.createElement('details')
-                    let getRecipeSummary = document.createElement('summary')
-                    let getRecipeMoreDetails = document.createElement('p')
-                    
-                    getRecipeDetails.id="details"
-                    getRecipeSummary.textContent= "Get the recipe"
-                    getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
-                    liGetRecipeContainer.append(getRecipeDetails)
-                    h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                   let title = document.createElement('li')
+                   title.id="hey"
+                   let h4Time = document.createElement('li')
+                   let liGetRecipeContainer = document.createElement('li')
+                   let getRecipeDetails = document.createElement('details')
+                   let getRecipeSummary = document.createElement('summary')
+                   let getRecipeMoreDetails = document.createElement('p')  
+
+                   getRecipeDetails.id="details"
+                   getRecipeSummary.textContent= "Get the recipe"
+                   getRecipeSummary.id="gtr"
+                   getRecipeDetails.append(getRecipeSummary, getRecipeMoreDetails)
+                   liGetRecipeContainer.append(getRecipeDetails)
+                   h4Time.textContent = `Ready in: ${meals.readyInMinutes} minutes`
+                   h4Time.id="h4time"
                     image.src = meals.image
                     title.textContent = meals.title
-                    summaryLi.innerHTML = meals.summary
-                    recipeUl.appendChild(recipeLi)
-                    recipeLi.append(title, image, summaryLi, h4Time,liGetRecipeContainer)
+                   summaryLi.innerHTML = meals.summary
+                   recipeUl.appendChild(recipeLi)
+                    recipeLi.append(title, image, h4Time, summaryLi,liGetRecipeContainer)
                     h3RecipeTitle.append(recipeUl)
                     buttonResultsContainer.append(h3RecipeTitle)
 
-                         let steps= meals.analyzedInstructions[0].steps
+                    let steps= meals.analyzedInstructions[0].steps
                         steps.forEach((stepList)=>{
                             let step = document.createElement('p')
+                            step.id="steps"
                             getRecipeMoreDetails.append(step)
                             let stepNumber = stepList.number
                             let direction = stepList.step
@@ -121,10 +143,10 @@ function initialRender(data){
                         } }) })    
                     
         clear.addEventListener('click',()=>{
-        let test = document.createElement('h1')
-        buttonResultsContainer.innerHTML=''
-        test.textContent=""
-        buttonResultsContainer.append(test)             
+            let clearContainer = document.createElement('h4')
+            buttonResultsContainer.innerHTML=''
+            clearContainer.textContent=""
+            buttonResultsContainer.append(clearContainer)             
                          })                      
 
                 }
@@ -144,7 +166,7 @@ function fetchData(query){
         redirect: 'follow'
       };
       
-      fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${query}`, requestOptions)
+      fetch(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${query}`, requestOptions)
         .then(response => response.json())
         .then(result => result.results.forEach(renderMealsCard) )//result.forEach(renderMealsCard))
         .catch(error => console.log('error', error));
@@ -158,7 +180,7 @@ function renderRecipe(recipe){
         redirect: 'follow'
       };
       
-    fetch(`https://api.spoonacular.com/recipes/${id}/card?apiKey=${API_KEY}`, requestOptions)
+    fetch(`https://api.spoonacular.com/recipes/${id}/card?apiKey=${apiKey}`, requestOptions)
     .then(response => response.json())
     .then(result => { console.log(result)
         let url = result.url
@@ -202,7 +224,7 @@ function createModal(){
           <!-- Modal content -->
           <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <p></p>
           </div>
         
         </div>`)

@@ -5,27 +5,18 @@
   box-sizing: border-box;
 }
 
-h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 /* layout */
+
 body {
   font-family: Lato, "Helvetica Neue", Helvetica, sans-serif;
   color: #000;
   font-size: 14px;
   transition: all 0.2s;
   background-color: #fdfcdc;
-  background-image: url("./assets/backgroundImg.jpg") no-repeat center center
-    fixed;
-  background-size: 100% 100%;
 }
 
 h1 {
   font-size: 40px;
-  align-items: center;
 }
 
 #main {
@@ -35,7 +26,7 @@ h1 {
 }
 
 #search-form input {
-  width: 99%;
+  width: 50%;
   border: 1px solid rgba(34, 36, 38, 0.15);
   padding: 12px;
   min-height: 40px;
@@ -108,44 +99,6 @@ h1 {
   color: #c59b08;
 }
 
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 /* Troy's recipe button CSS */
 #getRecipe {
   display: none;
@@ -173,7 +126,13 @@ h1 {
   background-color: #a2b9c1;
   color: white;
   cursor: pointer;
+  margin-right: 5px;
 }
+
+#button-container {
+  padding-left: 20px;
+}
+
 #getRecipe:hover,
 #quick-meals-button:hover,
 #clear:hover,
@@ -216,4 +175,72 @@ h1 {
 #container {
   padding: 2em;
   background-color: #fdfcdc;
+}
+
+/* new css for Troy's button content*/
+#recipe-title {
+  color: rgb(97, 93, 93);
+  line-height: 1.8;
+  padding-right: 10px;
+
+  position: inherit;
+  background: #e0dfca90;
+  /* width: 100%; */
+  background-blend-mode: soft-light;
+  max-width: 900px;
+  margin-left: 300px;
+
+  text-align: center;
+}
+#recipe-title ul li {
+  list-style: none;
+}
+#recipe-title a {
+  text-decoration: none;
+  color: #c59b08;
+  cursor: pointer;
+}
+#recipe-title a:hover {
+  text-decoration: none;
+  color: rgb(97, 93, 93);
+}
+
+#recipe-title img {
+  border-radius: 57%;
+  float: left;
+  padding-top: 40px;
+  padding-left: 20px;
+}
+
+#recipe-title li #hey {
+  /*title */
+  font-style: oblique;
+  font-size: 4.319654427645788vw;
+  padding-right: 500px;
+  line-height: 1.2;
+  padding-top: 60px;
+  padding-left: 15px;
+}
+#recipe-title li #summary {
+  float: top;
+  padding-left: 370px;
+  padding-top: 20px;
+  text-align: left;
+}
+
+#recipe-title li #gtr {
+  font-style: oblique;
+  font-size: 40px;
+  padding-left: 400px;
+}
+#recipe-title li #h4time {
+  /* padding-right: 200px; */
+  color: rgba(185, 101, 92, 0.735);
+  font-size: 20px;
+}
+
+#steps {
+  color: rgba(160, 81, 45, 0.747);
+  text-align: left;
+  padding-left: 80px;
 }

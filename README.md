@@ -18,3 +18,8 @@ don't already have them.
 JavaScript
 HTML5
 CSS3
+
+## App preview
+
+
+![App Preview](assets/preview.png "App Preview")

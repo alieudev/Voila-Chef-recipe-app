@@ -6,13 +6,14 @@ const apiKey = '2b744349f3d8403ab9076a2080cd086d'
 //////////////////////////////////////////////////////////////////////////////
 document.addEventListener('DOMContentLoaded', ()=> {
     fetchInitialData()
+    const home = document.querySelector('h1')
+    home.addEventListener('click', ()=> { 
+        location.href = "https://alieudev.github.io/Voila-Chef-recipe-app/";
+    })
 }) 
 
  // this function fetches all of my data! Using troy.json
     function fetchInitialData(){
-        // fetch('http://localhost:3000/results')
-        // .then(res=> res.json())
-        // .then(data => {initialRender(data)})
     const URL = 'https://api.spoonacular.com/recipes/complexSearch?apiKey='
     //let query1 = 'chicken'
     let queryList =['chicken', 'pork', 'beef', 'rice','pasta','pizza','dessert','cake','pie','meal','breakfast','lunch','dinner','brunch','fruit','smoothie','coffee','hotdog','burger','pie','ice cream','salad','tofu','vegan','vegetarian','keto','sausage','soup','bread']
@@ -307,14 +308,7 @@ function renderMealsCard(mealInfo){
     let btn = document.querySelector('#myBtn');
     let span = document.querySelector('.close');
 
-    // btn.addEventListener('click', (e) => { 
-    //     let data = e.target 
-    //     console.log(mealInfo)
-    //     modal.style.display = "block";
-    //     let pText = document.querySelector('.modal-content p')
-    //     pText.textContent = mealInfo.title;
 
-    // })
     btn.onclick = function() {
         renderRecipe(mealInfo)
     }
